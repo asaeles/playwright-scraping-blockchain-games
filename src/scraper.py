@@ -1,3 +1,4 @@
+import os
 import csv
 import asyncio
 from pathlib import Path
@@ -9,8 +10,21 @@ from playwright.async_api import async_playwright
 # --------------------------
 MAX_PAGES = 8  # how many persistent Page objects to keep in the pool (concurrency level)
 TOTAL_PAGES = 61  # number of site pages to scrape
-OUTPUT_DIR = Path("../output").resolve()  # Absolute path, available everywhere
-OUTPUT_DIR.mkdir(exist_ok=True)  # Ensure directory exists
+
+# --------------------------
+# Output directory setup
+# --------------------------
+
+# Get the absolute path of the current script's directory
+# And go up one level to the project root directory
+# Finally, combine the project root with the 'output' directory name
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'output')
+print(f"Calculated Output Directory Path: {OUTPUT_DIR}")
+
+# Create the output directory if it doesn't exist
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
+    print(f"Created output directory: {OUTPUT_DIR}")
 
 # --------------------------
 # Page pool helpers
@@ -176,7 +190,7 @@ async def main():
         'Name', 'Desc', 'Category', 'Blockchain', 'Device',
         'Status', 'NFT', 'F2P', 'P2E', 'Score', 'Link'
     ]
-    with open(OUTPUT_DIR / 'games.csv', 'w', encoding='utf-8', newline='') as out:
+    with open(os.path.join(OUTPUT_DIR, 'games.csv'), 'w', encoding='utf-8', newline='') as out:
         writer = csv.DictWriter(out, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(all_results)
