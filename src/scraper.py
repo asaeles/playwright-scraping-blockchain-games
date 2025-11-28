@@ -1,7 +1,6 @@
 import os
 import csv
 import asyncio
-from pathlib import Path
 from bs4 import BeautifulSoup
 from playwright.async_api import async_playwright
 
