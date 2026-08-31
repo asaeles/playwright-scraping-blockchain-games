@@ -195,9 +195,3 @@ async def main():
         writer.writerows(all_results)
 
     print("[Main] Done! CSV saved to games.csv")
-
-# --------------------------
-# Entry point
-# --------------------------
-if __name__ == "__main__":
-    asyncio.run(main())

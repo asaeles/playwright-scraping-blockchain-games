@@ -1,8 +1,17 @@
-# Python
-venv/
-__pycache__/
+# === Python Build & Cache ===
+*.egg-info/
 *.py[cod]
+.ruff_cache/
+__pycache__/
+build/
+
+# === Virtual Environments ===
+venv/
+
+# === Configuration & Secrets ===
 *.env
 
-# Data/outputs
+# === Temporary Files & Testing ===
+*.json
+*.log
 output/
